@@ -1,0 +1,100 @@
+Downloading 126MB Caltech101 data set...
+
+tbl = 
+
+      Label      Count
+    _________    _____
+
+    airplanes    800  
+    ferry         67  
+    laptop        81  
+
+
+ans = 
+
+      Label      Count
+    _________    _____
+
+    airplanes    67   
+    ferry        67   
+    laptop       67   
+
+Warning: MATLAB has disabled some advanced graphics rendering features by switching to
+software OpenGL. For more information, click here. 
+Downloading pre-trained CNN model...
+
+convnet = 
+
+  SeriesNetwork with properties:
+
+    Layers: [23x1 nnet.cnn.layer.Layer]
+
+
+ans = 
+
+  23x1 Layer array with layers:
+
+     1   'input'                 Image Input                   227x227x3 images with 'zerocenter' normalization
+     2   'conv1'                 Convolution                   96 11x11x3 convolutions with stride [4  4] and padding [0  0]
+     3   'relu1'                 ReLU                          ReLU
+     4   'norm1'                 Cross Channel Normalization   cross channel normalization with 5 channels per element
+     5   'pool1'                 Max Pooling                   3x3 max pooling with stride [2  2] and padding [0  0]
+     6   'conv2'                 Convolution                   256 5x5x48 convolutions with stride [1  1] and padding [2  2]
+     7   'relu2'                 ReLU                          ReLU
+     8   'norm2'                 Cross Channel Normalization   cross channel normalization with 5 channels per element
+     9   'pool2'                 Max Pooling                   3x3 max pooling with stride [2  2] and padding [0  0]
+    10   'conv3'                 Convolution                   384 3x3x256 convolutions with stride [1  1] and padding [1  1]
+    11   'relu3'                 ReLU                          ReLU
+    12   'conv4'                 Convolution                   384 3x3x192 convolutions with stride [1  1] and padding [1  1]
+    13   'relu4'                 ReLU                          ReLU
+    14   'conv5'                 Convolution                   256 3x3x192 convolutions with stride [1  1] and padding [1  1]
+    15   'relu5'                 ReLU                          ReLU
+    16   'pool5'                 Max Pooling                   3x3 max pooling with stride [2  2] and padding [0  0]
+    17   'fc6'                   Fully Connected               4096 fully connected layer
+    18   'relu6'                 ReLU                          ReLU
+    19   'fc7'                   Fully Connected               4096 fully connected layer
+    20   'relu7'                 ReLU                          ReLU
+    21   'fc8'                   Fully Connected               1000 fully connected layer
+    22   'prob'                  Softmax                       softmax
+    23   'classificationLayer'   Classification Output         cross-entropy with 'n01440764', 'n01443537', and 998 other classes
+
+ans = 
+
+  ImageInputLayer with properties:
+
+                Name: 'input'
+           InputSize: [227 227 3]
+    DataAugmentation: 'none'
+       Normalization: 'zerocenter'
+
+
+ans = 
+
+  ClassificationOutputLayer with properties:
+
+      OutputSize: 1000
+    LossFunction: 'crossentropyex'
+      ClassNames: {1000x1 cell}
+            Name: 'classificationLayer'
+
+
+ans =
+
+        1000
+
+
+confMat =
+
+     1     0     0
+     0     1     0
+     0     0     1
+
+
+ans =
+
+     1
+
+
+label = 
+
+     airplanes 
