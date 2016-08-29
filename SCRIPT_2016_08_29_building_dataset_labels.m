@@ -101,3 +101,24 @@ new_dataset_label = [new_dataset_label type1_label_row type1_label_row type2_lab
 new_dataset_label = [new_dataset_label type1_label_row type2_label_row type2_label_row type2_label_row type2_label_row];
 new_dataset_label = [new_dataset_label type2_label_row type1_label_row type2_label_row type1_label_row type2_label_row];
 new_dataset_label = [new_dataset_label type2_label_row type1_label_row type2_label_row type1_label_row type1_label_row type1_label_row];
+
+% building the categoricla label
+dataset_categorical_label = categorical(new_dataset_label)';
+clearvars -except dataset_categorical_label;
+
+% the first 465 images are set into training
+training_categorical_label = dataset_categorical_label(1:465,:);
+
+% the last 155 images are set into testing
+testing_categorical_label = dataset_categorical_label(466:620,:);
+
+% building the thermal data imageDatastore object
+% this is required since it's the type required by the ConvNets
+% change the folder to the correct folder
+% 
+thermaldata_training_imds = imageDatastore('./img/training');
+thermaldata_testing_imds = imageDatastore('./img/testing')
+
+% this is to set the available categorical label to the imds object
+% the imds object has a 'label' field for classification purposes
+thermaldata_imds.Labels = training_categorical_label;
