@@ -1,0 +1,16 @@
+
+layers = [imageInputLayer([120 160 3],'Normalization','none');
+          convolution2dLayer(5,20);
+          reluLayer();
+          maxPooling2dLayer(2,'Stride',2);
+          convolution2dLayer(5,16);
+          reluLayer();
+          maxPooling2dLayer(2,'Stride',2);
+          fullyConnectedLayer(256);
+          reluLayer();
+          fullyConnectedLayer(10);
+          softmaxLayer();
+          classificationLayer()];
+      
+opts = trainingOptions('sgdm');
+net = trainNetwork(imds, layers, opts);
