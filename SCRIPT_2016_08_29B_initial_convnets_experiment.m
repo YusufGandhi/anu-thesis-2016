@@ -20,7 +20,7 @@ opts = trainingOptions('sgdm');
 
 tic;
 % train the network
-net = trainNetwork(thermaldata_imds, layers, opts);
+net = trainNetwork(thermaldata_training_imds, layers, opts);
 toc;
 
 % testing the accuracy
