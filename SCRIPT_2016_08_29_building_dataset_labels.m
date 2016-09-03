@@ -1,3 +1,6 @@
+% ===============
+% LABEL: 0 = Calm; 1 = Stressful
+% ===============
 % the labels of the video based on Ramin's documents
 % each row is the label for each segment of the video
 % there are 20 segments in total
@@ -116,8 +119,8 @@ testing_categorical_label = dataset_categorical_label(466:620,:);
 % this is required since it's the type required by the ConvNets
 % change the folder to the correct folder
 % [IMPORTANT] : change the folder to the correct path
-thermaldata_training_imds = imageDatastore('./img/25percent/training');
-thermaldata_testing_imds = imageDatastore('./img/25percent/testing');
+thermaldata_training_imds = imageDatastore('./img/100percent/training');
+thermaldata_testing_imds = imageDatastore('./img/100percent/testing');
 
 % this is to set the available categorical label to the imds object
 % the imds object has a 'label' field for classification purposes
