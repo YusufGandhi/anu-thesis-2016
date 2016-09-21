@@ -2,8 +2,13 @@
 % just changing the input layer to the correct dimension (160x120)
 % and to 3 channels
 
+
 layers = [imageInputLayer([200 200 3],'Normalization','none');
           convolution2dLayer(5,20);
+
+% layers = [imageInputLayer([480 640 3],'Normalization','none');
+%           convolution2dLayer(5,20,'Stride',3);
+          
           reluLayer();
           maxPooling2dLayer(2,'Stride',2);
           dropoutLayer(0.2);
@@ -18,8 +23,13 @@ layers = [imageInputLayer([200 200 3],'Normalization','none');
           classificationLayer()];
 
 %  1st experiment
+
 %  layers = [imageInputLayer([200 200 3],'Normalization','none');
 %           convolution2dLayer(5,20,'Stride',4);
+
+%  layers = [imageInputLayer([480 640 3],'Normalization','none');
+%           convolution2dLayer(5,20,'Stride',3);
+
 %           reluLayer();
 %           maxPooling2dLayer(2,'Stride',2);
 %           convolution2dLayer(5,16);
