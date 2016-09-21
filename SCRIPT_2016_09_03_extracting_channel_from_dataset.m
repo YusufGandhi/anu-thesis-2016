@@ -1,8 +1,8 @@
-% middle_frame_dataset_channelR = cell(1,620);
+middle_frame_dataset_channelR = cell(1,620);
 % middle_frame_dataset_channelG = cell(1,620);
 % middle_frame_dataset_channelB = cell(1,620);
-% for i=1:620
-%     middle_frame_dataset_channelR{1,i} = middle_frame_cropped_cell{1,i}(:,:,1);
+for i=1:620
+    middle_frame_dataset_channelR{1,i} = middle_frame_cropped_cell{1,i}(:,:,1);
 %     middle_frame_dataset_channelG{1,i} = middle_frame_cropped_cell{1,i}(:,:,2);
 %     middle_frame_dataset_channelB{1,i} = middle_frame_cropped_cell{1,i}(:,:,3);
 % 
@@ -10,14 +10,14 @@
 % %    middle_frame_dataset_channelR{1,i} = middle_frame_dataset{1,i}(:,:,1);
 % %    middle_frame_dataset_channelG{1,i} = middle_frame_dataset{1,i}(:,:,2);
 % %    middle_frame_dataset_channelB{1,i} = middle_frame_dataset{1,i}(:,:,3);
-% end
+end
 % % 
 % % 
 % % 
-% % % hidden_size = 4000; %30720; % 10%
-% % % fprintf('Training autoencoder B...');
-% % % auto_encoder_channelB = trainAutoencoder(middle_frame_dataset_channelB,hidden_size);
-% % % fprintf('DONE\n');
+hidden_size = 4000; %30720; % 10%
+fprintf('Training autoencoder R...');
+autoencoder_1stlayer_channelR_4000 = trainAutoencoder(middle_frame_dataset_channelB,hidden_size);
+fprintf('DONE\n');
 % % 
 % % % training the 2nd layer of autoencoder
 % feat1_R = encode(auto_encoder_channelR, middle_frame_dataset_channelR);
@@ -47,6 +47,6 @@
 % feat4_B = encode(autoencoder_channel_B_fourth_layer_10, feat3_B);
 
 % training softmax layer red
-softnet_R = trainSoftmaxLayer(feat4_R, dataset_categorical_label_softmax);
-softnet_G = trainSoftmaxLayer(feat4_G, dataset_categorical_label_softmax);
-softnet_B = trainSoftmaxLayer(feat4_B, dataset_categorical_label_softmax);
+% softnet_R = trainSoftmaxLayer(feat4_R, dataset_categorical_label_softmax);
+% softnet_G = trainSoftmaxLayer(feat4_G, dataset_categorical_label_softmax);
+% softnet_B = trainSoftmaxLayer(feat4_B, dataset_categorical_label_softmax);
