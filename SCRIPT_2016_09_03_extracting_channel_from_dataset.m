@@ -1,7 +1,7 @@
-middle_frame_dataset_channelR = cell(1,620);
+middle_frame_dataset_channelR = cell(1,n);
 % middle_frame_dataset_channelG = cell(1,620);
 % middle_frame_dataset_channelB = cell(1,620);
-for i=1:620
+for i=1:n
     middle_frame_dataset_channelR{1,i} = middle_frame_cropped_cell{1,i}(:,:,1);
 %     middle_frame_dataset_channelG{1,i} = middle_frame_cropped_cell{1,i}(:,:,2);
 %     middle_frame_dataset_channelB{1,i} = middle_frame_cropped_cell{1,i}(:,:,3);
@@ -16,7 +16,8 @@ end
 % % 
 hidden_size = 4000; %30720; % 10%
 fprintf('Training autoencoder R...');
-autoencoder_1stlayer_channelR_4000 = trainAutoencoder(middle_frame_dataset_channelB,hidden_size);
+autoencoder_1stlayer_channelR_4000 = trainAutoencoder(...
+    middle_frame_dataset_channelR, hidden_size);
 fprintf('DONE\n');
 % % 
 % % % training the 2nd layer of autoencoder
