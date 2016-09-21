@@ -105,24 +105,38 @@ new_dataset_label = [new_dataset_label type1_label_row type2_label_row type2_lab
 new_dataset_label = [new_dataset_label type2_label_row type1_label_row type2_label_row type1_label_row type2_label_row];
 new_dataset_label = [new_dataset_label type2_label_row type1_label_row type2_label_row type1_label_row type1_label_row type1_label_row];
 
-% building the categoricla label
+% building the categorical label
 dataset_categorical_label = categorical(new_dataset_label)';
-clearvars -except dataset_categorical_label;
+% clearvars -except dataset_categorical_label;
+
+% categorical label for softmax layer
+% needed for train the deepnet autoencoders + softmax
+dataset_categorical_label_softmax = zeros(2, 620);
+
+for i=1:620
+    if new_dataset_label(1,i) == 1
+        fprintf('Label 1 (stressful)\n');
+        dataset_categorical_label_softmax(2, i) = 1;
+    else
+        fprintf('Label 0 (calm)\n');
+        dataset_categorical_label_softmax(1, i) = 1;
+    end
+end
 
 % the first 465 images are set into training
-training_categorical_label = dataset_categorical_label(1:465,:);
-
-% the last 155 images are set into testing
-testing_categorical_label = dataset_categorical_label(466:620,:);
-
-% building the thermal data imageDatastore object
-% this is required since it's the type required by the ConvNets
-% change the folder to the correct folder
-% [IMPORTANT] : change the folder to the correct path
-thermaldata_training_imds = imageDatastore('./img/100percent/training');
-thermaldata_testing_imds = imageDatastore('./img/100percent/testing');
-
-% this is to set the available categorical label to the imds object
-% the imds object has a 'label' field for classification purposes
-thermaldata_training_imds.Labels = training_categorical_label;
-thermaldata_testing_imds.Labels = testing_categorical_label;
+% training_categorical_label = dataset_categorical_label(1:465,:);
+% 
+% % the last 155 images are set into testing
+% testing_categorical_label = dataset_categorical_label(466:620,:);
+% 
+% % building the thermal data imageDatastore object
+% % this is required since it's the type required by the ConvNets
+% % change the folder to the correct folder
+% % [IMPORTANT] : change the folder to the correct path
+% thermaldata_training_imds = imageDatastore('./img/100percent/training');
+% thermaldata_testing_imds = imageDatastore('./img/100percent/testing');
+% 
+% % this is to set the available categorical label to the imds object
+% % the imds object has a 'label' field for classification purposes
+% thermaldata_training_imds.Labels = training_categorical_label;
+% thermaldata_testing_imds.Labels = testing_categorical_label;
