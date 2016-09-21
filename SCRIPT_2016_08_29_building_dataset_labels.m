@@ -105,7 +105,7 @@ new_dataset_label = [new_dataset_label type1_label_row type2_label_row type2_lab
 new_dataset_label = [new_dataset_label type2_label_row type1_label_row type2_label_row type1_label_row type2_label_row];
 new_dataset_label = [new_dataset_label type2_label_row type1_label_row type2_label_row type1_label_row type1_label_row type1_label_row];
 
-% building the categorical label
+% building the categorical label required by the dataset label
 dataset_categorical_label = categorical(new_dataset_label)';
 % clearvars -except dataset_categorical_label;
 
