@@ -1,3 +1,6 @@
+% ===============
+% LABEL: 0 = Calm; 1 = Stressful
+% ===============
 % the labels of the video based on Ramin's documents
 % each row is the label for each segment of the video
 % there are 20 segments in total
@@ -106,20 +109,48 @@ new_dataset_label = [new_dataset_label type2_label_row type1_label_row type2_lab
 dataset_categorical_label = categorical(new_dataset_label)';
 clearvars -except dataset_categorical_label;
 
+% [UPDATE 2016-09-20]
+% Try to use only 1 imageDatastore 
+thermaldata_cropped_200_by_200_imds = imageDatastore('./img/cropped_200_by_200/');
+thermaldata_cropped_200_by_200_imds.Labels = dataset_categorical_label;
+
+% random image data store
+random_ds = shuffle(thermaldata_cropped_200_by_200_imds);
+
+% partition the random imageDatastore into half and take the first half
+thermaldata_training_imds = partition(random_ds, 2, 1);
+
+% partition the random imageDatastore into four quarters and take the third
+% quarter
+three_fourth_shuffle_subds = partition(random_ds, 4, 3);
+
+% append the third quarter partition to the actual training dataset
+% and also the labesl
+thermaldata_training_imds.Files(311:465) = three_fourth_shuffle_subds.Files;
+thermaldata_training_imds.Labels(311:465) = three_fourth_shuffle_subds.Labels;
+
+% the testing datastore
+thermaldata_testing_imds = partition(random_ds, 4, 4);
+
+
+
+
+
+
 % the first 465 images are set into training
-training_categorical_label = dataset_categorical_label(1:465,:);
+% training_categorical_label = dataset_categorical_label(1:465,:);
 
 % the last 155 images are set into testing
-testing_categorical_label = dataset_categorical_label(466:620,:);
+% testing_categorical_label = dataset_categorical_label(466:620,:);
 
 % building the thermal data imageDatastore object
 % this is required since it's the type required by the ConvNets
 % change the folder to the correct folder
 % [IMPORTANT] : change the folder to the correct path
-thermaldata_training_imds = imageDatastore('./img/25percent/training');
-thermaldata_testing_imds = imageDatastore('./img/25percent/testing');
+% thermaldata_training_imds = imageDatastore('./img/100percent/training');
+% thermaldata_testing_imds = imageDatastore('./img/100percent/testing');
 
 % this is to set the available categorical label to the imds object
 % the imds object has a 'label' field for classification purposes
-thermaldata_training_imds.Labels = training_categorical_label;
-thermaldata_testing_imds.Labels = testing_categorical_label;
+% thermaldata_training_imds.Labels = training_categorical_label;
+% thermaldata_testing_imds.Labels = testing_categorical_label;
